@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Ball Players API",
-    "description": "Basketball Team Player API",
+    "description": "Basketball Team Players API",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
