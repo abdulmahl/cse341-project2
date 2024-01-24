@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const teamMemberSchema = mongoose.Schema({
+const playerSchema = mongoose.Schema({
   firstname: String,
   lastname: String,
   age: Number,
@@ -11,4 +11,4 @@ const teamMemberSchema = mongoose.Schema({
   isCaptain: Boolean,
 });
 
-module.exports = mongoose.model("team_members", teamMemberSchema);
+module.exports = mongoose.model("team_members", playerSchema);
