@@ -1,14 +1,8 @@
 const router = require("express").Router();
+const controller = require("../controllers/functions");
 
-router.use("/", require("./swagger"));
-
-router.get("/", (req, res) => {
-  //#swagger.tags=["I Got Swagger"]
-  res.send(
-    "<center><h1 style='color:crimson; padding-top: 15rem; font-size:6rem'>This is the CSE 341 Ball Players Project Home Page: Part-2</h1></center>"
-  );
-});
-
-// router.use("/players", require("./router"));
+router.get("/", controller.getAll);
+router.get("/:id", controller.getByid);
+router.post("/createMember", controller.createMember);
 
 module.exports = router;

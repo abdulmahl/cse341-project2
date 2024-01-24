@@ -15,20 +15,27 @@
     "/": {
       "get": {
         "tags": [
-          "I Got Swagger"
+          "Ball Players"
         ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
-          },
+          }
+        }
+      }
+    },
+    "/api-docs": {
+      "get": {
+        "description": "",
+        "responses": {
           "default": {
             "description": ""
           }
         }
       }
     },
-    "/team": {
+    "/players/": {
       "get": {
         "description": "",
         "responses": {
@@ -38,7 +45,7 @@
         }
       }
     },
-    "/{id}": {
+    "/players/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -62,7 +69,7 @@
         }
       }
     },
-    "/createMember": {
+    "/players/createMember": {
       "post": {
         "description": "",
         "parameters": [
@@ -106,16 +113,6 @@
           },
           "422": {
             "description": "Unprocessable Entity"
-          }
-        }
-      }
-    },
-    "/api-docs": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
           }
         }
       }
