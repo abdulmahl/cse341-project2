@@ -9,6 +9,10 @@ const playerSchema = mongoose.Schema({
   position: String,
   shoeSize: Number,
   isCaptain: Boolean,
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("team_members", playerSchema);

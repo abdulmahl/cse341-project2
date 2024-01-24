@@ -17,12 +17,13 @@ Content-Type: application/json
 {
     "firstname": "Tim",
     "lastname": "Duncan",
-    "age": 47,
+    "age": 49,
     "height": "2.11m",
     "jerseyNo": 21,
     "position": "Power Forward / Center",
     "shoeSize": 13,
-    "isCaptain": false
+    "isCaptain": false,
+    "timestamp": null
 }
 
 

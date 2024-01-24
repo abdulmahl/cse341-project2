@@ -35,6 +35,7 @@ const createPlayer = async (req, res) => {
     position: req.body.position,
     shoeSize: req.body.shoeSize,
     isCaptain: req.body.isCaptain,
+    timestamp: new Date(),
   });
   try {
     const savedPlayer = await player.save();
@@ -62,8 +63,10 @@ const updatePlayer = async (req, res) => {
           position: req.body.position,
           shoeSize: req.body.shoeSize,
           isCaptain: req.body.isCaptain,
+          timestamp: new Date(),
         },
-      }
+      },
+      { new: true }
     );
     // console.log("Player ID:", req.params.id);
     // console.log("Player:", req.body);
