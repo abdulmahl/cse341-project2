@@ -2,6 +2,7 @@ const { ObjectId } = require("mongodb");
 const Player = require("../model/player");
 
 const getAll = async (req, res) => {
+  //#swagger.tags=["Ball Players"]
   try {
     const players = await Player.find();
     res.status(200).json(players);
@@ -11,6 +12,7 @@ const getAll = async (req, res) => {
 };
 
 const getByid = async (req, res) => {
+  //#swagger.tags=["Ball Players"]
   if (!ObjectId.isValid(req.params.id)) {
     res.status(422).json({ message: "Error: id must be valid" });
   }
@@ -23,6 +25,7 @@ const getByid = async (req, res) => {
 };
 
 const createPlayer = async (req, res) => {
+  //#swagger.tags=["Ball Players"]
   const player = new Player({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -42,6 +45,7 @@ const createPlayer = async (req, res) => {
 };
 
 const updatePlayer = async (req, res) => {
+  //#swagger.tags=["Ball Players"]
   if (!ObjectId.isValid(req.params.id)) {
     res.status(422).json({ message: "Error: id must be valid" });
   }
@@ -74,6 +78,7 @@ const updatePlayer = async (req, res) => {
 };
 
 const deletePlayer = async (req, res) => {
+  //#swagger.tags=["Ball Players"]
   if (!ObjectId.isValid(req.params.id)) {
     res.status(422).json({ message: "Error: id must be valid" });
   }
@@ -87,4 +92,10 @@ const deletePlayer = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getByid, createPlayer, updatePlayer, deletePlayer };
+module.exports = {
+  getAll,
+  getByid,
+  createPlayer,
+  updatePlayer,
+  deletePlayer,
+};
