@@ -37,16 +37,108 @@
     },
     "/players/": {
       "get": {
+        "tags": [
+          "Ball Players"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
           }
         }
       }
     },
     "/players/{id}": {
       "get": {
+        "tags": [
+          "Ball Players"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Ball Players"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstname": {
+                  "example": "any"
+                },
+                "lastname": {
+                  "example": "any"
+                },
+                "age": {
+                  "example": "any"
+                },
+                "height": {
+                  "example": "any"
+                },
+                "jerseyNo": {
+                  "example": "any"
+                },
+                "position": {
+                  "example": "any"
+                },
+                "shoeSize": {
+                  "example": "any"
+                },
+                "isCaptain": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Ball Players"
+        ],
         "description": "",
         "parameters": [
           {
@@ -69,8 +161,11 @@
         }
       }
     },
-    "/players/createMember": {
+    "/players/createPlayer": {
       "post": {
+        "tags": [
+          "Ball Players"
+        ],
         "description": "",
         "parameters": [
           {
