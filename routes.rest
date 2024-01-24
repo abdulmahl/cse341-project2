@@ -11,7 +11,7 @@ GET http://localhost:3000/players/65b0212ee621c58da756170d
 
 
 ### Create team player
-POST http://localhost:3000/createMember HTTP/1.1
+POST http://localhost:3000/players/createMember HTTP/1.1
 Content-Type: application/json
 
 {
