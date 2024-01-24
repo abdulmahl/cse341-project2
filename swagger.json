@@ -54,7 +54,7 @@
     "/players/{id}": {
       "get": {
         "tags": [
-          "Ball Players"
+          "Ball Player"
         ],
         "description": "",
         "parameters": [
@@ -76,7 +76,7 @@
       },
       "put": {
         "tags": [
-          "Ball Players"
+          "Ball Player"
         ],
         "description": "",
         "parameters": [
@@ -137,7 +137,7 @@
       },
       "delete": {
         "tags": [
-          "Ball Players"
+          "Ball Player"
         ],
         "description": "",
         "parameters": [
@@ -164,7 +164,7 @@
     "/players/createPlayer": {
       "post": {
         "tags": [
-          "Ball Players"
+          "Ball Player"
         ],
         "description": "",
         "parameters": [

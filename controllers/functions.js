@@ -12,7 +12,7 @@ const getAll = async (req, res) => {
 };
 
 const getByid = async (req, res) => {
-  //#swagger.tags=["Ball Players"]
+  //#swagger.tags=["Ball Player"]
   if (!ObjectId.isValid(req.params.id)) {
     res.status(422).json({ message: "Error: id must be valid" });
   }
@@ -25,7 +25,7 @@ const getByid = async (req, res) => {
 };
 
 const createPlayer = async (req, res) => {
-  //#swagger.tags=["Ball Players"]
+  //#swagger.tags=["Ball Player"]
   const player = new Player({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -45,7 +45,7 @@ const createPlayer = async (req, res) => {
 };
 
 const updatePlayer = async (req, res) => {
-  //#swagger.tags=["Ball Players"]
+  //#swagger.tags=["Ball Player"]
   if (!ObjectId.isValid(req.params.id)) {
     res.status(422).json({ message: "Error: id must be valid" });
   }
@@ -78,7 +78,7 @@ const updatePlayer = async (req, res) => {
 };
 
 const deletePlayer = async (req, res) => {
-  //#swagger.tags=["Ball Players"]
+  //#swagger.tags=["Ball Player"]
   if (!ObjectId.isValid(req.params.id)) {
     res.status(422).json({ message: "Error: id must be valid" });
   }
