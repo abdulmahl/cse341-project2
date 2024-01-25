@@ -12,10 +12,9 @@ mongoose
   });
 
 process.on("SIGINT", () => {
-  mongoose.connection.close(() => {
-    console.log("Mongodb connection closed");
-    process.exit(0);
-  });
+  mongoose.connection.close();
+  console.log("Mongodb connection closed!");
+  process.exit(0);
 });
 
 module.exports = mongoose;
