@@ -1,4 +1,5 @@
 const { ObjectId } = require("mongodb");
+const JoiPlayer = require("../model/validate");
 const Player = require("../model/player");
 
 const getAll = async (req, res) => {
@@ -12,7 +13,7 @@ const getAll = async (req, res) => {
 };
 
 const getByid = async (req, res) => {
-  //#swagger.tags=["Get team player by _id"]
+  //#swagger.tags=["Get team player by id"]
   if (!ObjectId.isValid(req.params.id)) {
     res.status(422).json({ message: "Error: id must be valid" });
   }
@@ -26,7 +27,7 @@ const getByid = async (req, res) => {
 
 const createPlayer = async (req, res) => {
   //#swagger.tags=["Create a new team player"]
-  const player = new Player({
+  const playerData = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     age: req.body.age,
@@ -35,8 +36,16 @@ const createPlayer = async (req, res) => {
     position: req.body.position,
     shoeSize: req.body.shoeSize,
     isCaptain: req.body.isCaptain,
-    timestamp: new Date(),
-  });
+  };
+
+  const { error } = JoiPlayer.validate(playerData);
+  if (error) {
+    return res
+      .status(422)
+      .json({ error: error.details.map((detail) => detail.message) });
+  }
+
+  const player = new Player(playerData);
   try {
     const savedPlayer = await player.save();
     res.status(201).json(savedPlayer);
@@ -48,32 +57,37 @@ const createPlayer = async (req, res) => {
 const updatePlayer = async (req, res) => {
   //#swagger.tags=["Update a team player by _id"]
   if (!ObjectId.isValid(req.params.id)) {
-    res.status(422).json({ message: "Error: id must be valid" });
+    return res.status(422).json({ message: "Error: id must be valid" });
   }
+  const playerId = new Object(req.params.id);
+  const updatedPlayer = {
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    age: req.body.age,
+    height: req.body.height,
+    jerseyNo: req.body.jerseyNo,
+    position: req.body.position,
+    shoeSize: req.body.shoeSize,
+    isCaptain: req.body.isCaptain,
+  }; // This option ensures that the updated document is returned
+
+  // Validate the updated player using Joi
+  const { error } = JoiPlayer.validate(updatedPlayer);
+  if (error) {
+    return res
+      .status(422)
+      .json({ error: error.details.map((detail) => detail.message) });
+  }
+
   try {
-    const updatedPlayer = await Player.updateOne(
-      { _id: req.params.id },
-      {
-        $set: {
-          firstname: req.body.firstname,
-          lastname: req.body.lastname,
-          age: req.body.age,
-          height: req.body.height,
-          jerseyNo: req.body.jerseyNo,
-          position: req.body.position,
-          shoeSize: req.body.shoeSize,
-          isCaptain: req.body.isCaptain,
-          timestamp: new Date(),
-        },
-      },
-      { new: true }
+    const response = await Player.updateOne(
+      { _id: playerId },
+      { $set: updatedPlayer }
     );
-    // console.log("Player ID:", req.params.id);
-    // console.log("Player:", req.body);
-    if (updatedPlayer.acknowledged > 0) {
-      return res.status(200).json({ message: "Player updated successfully" });
+    if (response.modifiedCount > 0) {
+      return res.status(204).json({ message: "Player updated successfully" });
     } else {
-      return res.status(404).json({ message: "Player not found" });
+      res.status(404).json({ message: "Player not found" });
     }
   } catch (err) {
     return res.status(500).json({ message: "Internal server error", err });
@@ -81,7 +95,7 @@ const updatePlayer = async (req, res) => {
 };
 
 const deletePlayer = async (req, res) => {
-  //#swagger.tags=["Delete team player by _id"]
+  //#swagger.tags=["Delete team player by id"]
   if (!ObjectId.isValid(req.params.id)) {
     res.status(422).json({ message: "Error: id must be valid" });
   }

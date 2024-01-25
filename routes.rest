@@ -17,7 +17,7 @@ Content-Type: application/json
 {
     "firstname": "Tim",
     "lastname": "Duncan",
-    "age": 49,
+    "age": "49",
     "height": "2.11m",
     "jerseyNo": 21,
     "position": "Power Forward / Center",
@@ -28,20 +28,21 @@ Content-Type: application/json
 
 
 ### Update team player by id
-PUT http://localhost:3000/players/65b0212ee621c58da756170d HTTP/1.1
+PUT http://localhost:3000/players/65b00fb8d78c5d8ebcb0435f HTTP/1.1
 Content-Type: application/json
 
 {
-    "firstname": "Russel",
-    "lastname": "Westbrook",
-    "age": 35,
-    "height": "1.93m",
+    "firstname": "Lebron",
+    "lastname": "James",
+    "age": 39,
+    "height": "2.6m",
     "jerseyNo": 36,
     "position": "Point Guard",
-    "shoeSize": 11,
-    "isCaptain": false
+    "shoeSize": 13,
+    "isCaptain": true,
+    "timestamp": null
 }
 
 
 ### Delete team player by id
-DELETE http://localhost:3000/players/65b02227e621c58da7561714
+DELETE http://localhost:3000/players/65b14f1d57df66cacb1aa14a
