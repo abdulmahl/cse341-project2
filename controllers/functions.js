@@ -5,7 +5,7 @@ const getAll = async (req, res) => {
   //#swagger.tags=["Get all team players"]
   try {
     const players = await Player.find();
-    res.status(200).json({ message: "All team players", players });
+    res.status(200).json(players);
   } catch (err) {
     return res.status(422).json({ message: err });
   }
@@ -18,7 +18,7 @@ const getByid = async (req, res) => {
   }
   try {
     const playerById = await Player.findById(req.params.id);
-    res.status(200).json({ message: "Player by _id", playerById });
+    res.status(200).json(playerById);
   } catch (err) {
     return res.status(422).json({ message: err });
   }
@@ -39,9 +39,7 @@ const createPlayer = async (req, res) => {
   });
   try {
     const savedPlayer = await player.save();
-    res
-      .status(201)
-      .json({ message: "Player inserted successfully", savedPlayer });
+    res.status(201).json(savedPlayer);
   } catch (err) {
     return res.status(422).json({ message: err });
   }
@@ -73,9 +71,7 @@ const updatePlayer = async (req, res) => {
     // console.log("Player ID:", req.params.id);
     // console.log("Player:", req.body);
     if (updatedPlayer.acknowledged > 0) {
-      return res
-        .status(200)
-        .json({ message: "Player updated successfully", updatedPlayer });
+      return res.status(200).json({ message: "Player updated successfully" });
     } else {
       return res.status(404).json({ message: "Player not found" });
     }
@@ -93,9 +89,7 @@ const deletePlayer = async (req, res) => {
     const deletedPlayer = await Player.deleteOne({ _id: req.params.id });
     console.log(deletedPlayer);
     if (deletedPlayer.deletedCount > 0)
-      return res
-        .status(200)
-        .json({ message: "Player deleted successfully", deletedPlayer });
+      return res.status(200).json({ message: "Player deleted successfully" });
   } catch (err) {
     return res.status(404).json({ message: err });
   }
