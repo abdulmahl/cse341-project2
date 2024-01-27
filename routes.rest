@@ -22,7 +22,7 @@ Content-Type: application/json
 {
     "firstname": "Tim",
     "lastname": "Duncan",
-    "age": "49",
+    "age": 49,
     "height": "2.11m",
     "jerseyNo": 21,
     "position": "Power Forward / Center",
