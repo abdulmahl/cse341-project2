@@ -3,12 +3,10 @@ const app = express();
 const session = require("express-session");
 const port = process.env.PORT || 3000;
 const connectDB = require("./database/connection");
-const passport = require("passport");
 const route = require("./routes");
 const authRoute = require("./routes/auth-routes");
+const passport = require("passport");
 const cookieKey = process.env.COOKIE_KEY;
-
-app.set("view engine", "ejs");
 
 app.use(express.json());
 app.use((req, res, next) => {

@@ -2,16 +2,18 @@ const authRoute = require("express").Router();
 const passport = require("passport");
 
 authRoute.get("/login", (req, res) => {
-  res.render("login");
+  res.send("login");
 });
 
 authRoute.get("/logout", (req, res) => {
-  res.render("logout");
+  res.send("logout");
 });
 
 authRoute.get(
   "/google",
-  passport.authenticate("google", { scope: ["profile"] })
+  passport.authenticate("google", {
+    scope: ["profile"],
+  })
 );
 
 authRoute.get(
