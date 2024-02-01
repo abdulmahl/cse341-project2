@@ -17,7 +17,7 @@ app
   .use(express.json())
   .use(
     session({
-      secret: cookieKey,
+      secret: "secret",
       resave: true,
       saveUninitialized: true,
       cookie: {
