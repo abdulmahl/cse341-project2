@@ -9,4 +9,17 @@ authRoute.get("/logout", (req, res) => {
   res.render("logout");
 });
 
+authRoute.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile"] })
+);
+
+authRoute.get(
+  "/google/redirect",
+  passport.authenticate("google"),
+  (req, res) => {
+    res.send(req.user);
+  }
+);
+
 module.exports = authRoute;
