@@ -14,6 +14,10 @@ const cbURL = process.env.CALLBACK_URL;
 const port = process.env.PORT || 3000;
 const app = express();
 
+
+app.use(cors({ methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"] }))
+.use(cors({ origin: "*" }))
+
 app.set("view engine", "ejs");
 app
   .use(express.json())
@@ -41,10 +45,7 @@ app
     );
     res.status(200);
     next();
-  })
-  .use(cors({ methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"] }))
-  .use(cors({ origin: "*" }))
-  .use("/", route);
+  }).use("/", route);
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -111,7 +112,7 @@ app.get("/logout", (req, res) => {
       console.error("Error logging you out ", err);
       return res.redirect("/");
     }
-    res.render("home", { user: req.session.user });
+    res.render("home");
   });
 });
 
