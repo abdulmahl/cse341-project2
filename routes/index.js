@@ -12,14 +12,5 @@ router.get("/home", (req, res) => {
 
 router.get("/login", passport.authenticate("github"), (req, res) => {});
 
-router.get("/logout", passport.authenticate("github"), (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    } else {
-      return res.redirect("/");
-    }
-  });
-});
 
 module.exports = router;

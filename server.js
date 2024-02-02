@@ -14,9 +14,9 @@ const cbURL = process.env.CALLBACK_URL;
 const port = process.env.PORT || 3000;
 const app = express();
 
-
-app.use(cors({ methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"] }))
-.use(cors({ origin: "*" }))
+app
+  .use(cors({ methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"] }))
+  .use(cors({ origin: "*" }));
 
 app.set("view engine", "ejs");
 app
@@ -45,7 +45,8 @@ app
     );
     res.status(200);
     next();
-  }).use("/", route);
+  })
+  .use("/", route);
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -103,7 +104,11 @@ app.get("/", (req, res) => {
 // app.use("/dashboard", dashboardRouter);
 
 app.get("/dashboard", (req, res) => {
-  res.render("dashboard", { user: req.session.user });
+  if (req.session.user) {
+    res.render("dashboard", { user: req.session.user });
+  } else {
+    res.redirect("/home");
+  }
 });
 
 app.get("/logout", (req, res) => {
