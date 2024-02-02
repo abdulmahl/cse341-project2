@@ -105,7 +105,7 @@ app.get("/", (req, res) => {
 // app.use("/dashboard", dashboardRouter);
 
 app.get("/dashboard", (req, res) => {
-  if (req.session.user) {
+  if (req.session.user !== undefined) {
     res.render("dashboard", { user: req.session.user });
   } else {
     res.redirect("/");
