@@ -4,6 +4,7 @@ const connectDB = require("./database/connection");
 const passport = require("passport");
 const session = require("express-session");
 const GithubStrategy = require("passport-github2").Strategy;
+const User = require("./model/user-model");
 
 const route = require("./routes");
 const cookieKey = process.env.COOKIE_KEY;
@@ -13,6 +14,7 @@ const cbURL = process.env.CALLBACK_URL;
 const port = process.env.PORT || 3000;
 const app = express();
 
+app.set("view engine", "ejs");
 app
   .use(express.json())
   .use(
@@ -48,8 +50,10 @@ passport.serializeUser((user, done) => {
   done(null, user);
 });
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
+passport.deserializeUser((id, done) => {
+  User.findById(id).then((user) => {
+    done(null, user);
+  });
 });
 
 passport.use(
@@ -60,20 +64,55 @@ passport.use(
       callbackURL: cbURL,
     },
     (accessToken, refreshToken, profile, done) => {
-      // User.findOrCreate({ githubId: profile.id }, (err, user) => {
-      return done(null, profile);
-      // });
+      User.findOne({ githubId: profile.id })
+        .then((currentUser) => {
+          if (currentUser) {
+            console.log(`Current user: ${currentUser}`);
+            done(null, profile);
+          } else {
+            new User({
+              username: profile.username,
+              githubId: profile.id,
+              thumbnail: profile._json.avatar_url,
+            })
+              .save()
+              .then((newUser) => {
+                console.log(`New user created: ${newUser}`);
+                done(null, newUser);
+              })
+              .catch((err) => {
+                console.error(`Error creating user ${err}`);
+                done(err, null);
+              });
+          }
+        })
+        .catch((err) => {
+          console.error("Error finding user ", err);
+          done(err, null);
+        });
+      // return done(null, profile);
     }
   )
 );
 
-
 app.get("/", (req, res) => {
-  res.send(
-    req.session.user !== undefined
-      ? `<h1>You are logged in as ${req.session.user.displaName}</h1>`
-      : "<h1>You are not logged in...</h1>"
-  );
+  res.render("home");
+});
+
+// app.use("/dashboard", dashboardRouter);
+
+app.get("/dashboard", (req, res) => {
+  res.render("dashboard", { user: req.session.user });
+});
+
+app.get("/logout", (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      console.error("Error logging you out ", err);
+      return res.redirect("/");
+    }
+    res.render("home", { user: req.session.user });
+  });
 });
 
 app.get(
@@ -84,7 +123,7 @@ app.get(
   }),
   (req, res) => {
     req.session.user = req.user;
-    res.redirect("/");
+    res.redirect("/dashboard/");
   }
 );
 

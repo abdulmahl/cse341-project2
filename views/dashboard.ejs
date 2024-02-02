@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>You are logged in With GitHub</title>
+    <style>
+      div {
+        background: #333;
+        color: #fff;
+        padding: 1rem;
+        text-align: center;
+        width: 30%;
+        margin: 5rem auto;
+      }
+
+      div header h2 {
+        padding-bottom: 0.3rem;
+      }
+      div main a {
+        background: #fff;
+        padding: 1rem;
+        text-decoration: none;
+        color: #333;
+      }
+      div main a:hover {
+        background: #ffa444;
+        margin-top: 3rem;
+      }
+      img {
+        width: 30%;
+        margin-bottom: 1.3rem;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <header>
+        <h1>You are logged in as</h1>
+        <h2><%= user.username %></h2>
+        <img src="<%= user.thumbnail %>" alt="GitHub-Avatar" />
+      </header>
+      <main>
+        <a href="/">Logout</a>
+      </main>
+    </div>
+  </body>
+</html>
