@@ -66,6 +66,7 @@ passport.use(
       callbackURL: cbURL,
     },
     (accessToken, refreshToken, profile, done) => {
+      // console.log(profile);
       User.findOne({ githubId: profile.id })
         .then((currentUser) => {
           if (currentUser) {
@@ -75,7 +76,7 @@ passport.use(
             new User({
               username: profile.username,
               githubId: profile.id,
-              thumbnail: profile._json.avatar_url,
+              thumbnail: profile._json.avatar_url
             })
               .save()
               .then((newUser) => {
@@ -107,7 +108,7 @@ app.get("/dashboard", (req, res) => {
   if (req.session.user) {
     res.render("dashboard", { user: req.session.user });
   } else {
-    res.redirect("/home");
+    res.redirect("/");
   }
 });
 
