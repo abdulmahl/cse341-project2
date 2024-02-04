@@ -1,6 +1,6 @@
 const { ObjectId } = require("mongodb");
 const JoiPlayer = require("../model/validate");
-const Player = require("../model/schema");
+const Player = require("../model/player");
 
 const getAll = async (req, res) => {
   //#swagger.tags=["Get all team players"]
@@ -109,43 +109,10 @@ const deletePlayer = async (req, res) => {
   }
 };
 
-const githubCallback = (req, res) => {
-  req.session.user = req.user;
-  res.redirect("/dashboard/");
-};
-
-const logout = (req, res) => {
-  app.get("/logout", (req, res) => {
-    req.logout((err) => {
-      if (err) {
-        console.error("Error logging you out ", err);
-        return res.redirect("/");
-      }
-      res.render("home");
-    });
-  });
-};
-
-const dashboard = (req, res) => {
-  if (req.session.user !== undefined) {
-    res.render("dashboard", { user: req.session.user });
-  } else {
-    res.redirect("/");
-  }
-};
-
-const home = (req, res) => {
-  res.render("home");
-};
-
 module.exports = {
   getAll,
   getByid,
   createPlayer,
   updatePlayer,
   deletePlayer,
-  githubCallback,
-  logout,
-  dashboard,
-  home
 };
