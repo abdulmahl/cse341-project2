@@ -5,7 +5,7 @@
     "description": "Basketball Team Player API",
     "version": "1.0.0"
   },
-  "host": "https://basketball-players-api.onrender.com",
+  "host": "basketball-players-api.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
