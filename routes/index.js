@@ -1,6 +1,8 @@
 const passport = require("passport");
 const router = require("express").Router();
+const cors = require("cors");
 
+router.use("*", cors());
 router.use("/", require("./swagger"));
 router.use("/players", require("./routes"));
 router.get("/home", (req, res) => {
@@ -11,6 +13,5 @@ router.get("/home", (req, res) => {
 });
 
 router.get("/login", passport.authenticate("github"), (req, res) => {});
-
 
 module.exports = router;
