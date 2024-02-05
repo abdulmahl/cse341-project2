@@ -5,6 +5,7 @@ const cors = require("cors");
 router.use("*", cors());
 router.use("/", require("./swagger"));
 router.use("/players", require("./routes"));
+router.use("/users", require("./user-routes"));
 router.get("/home", (req, res) => {
   //#swagger.tags=["Ball Players"]
   res.send(
