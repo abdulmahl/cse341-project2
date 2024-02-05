@@ -7,15 +7,11 @@
   },
   "host": "basketball-players-api.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "paths": {
     "/home": {
       "get": {
-        "tags": [
-          "Ball Players"
-        ],
+        "tags": ["Ball Players"],
         "description": "",
         "responses": {
           "200": {
@@ -24,21 +20,10 @@
         }
       }
     },
-    "/login": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
+
     "/players/": {
       "get": {
-        "tags": [
-          "Get all team players"
-        ],
+        "tags": ["Get all team players"],
         "description": "",
         "responses": {
           "200": {
@@ -52,9 +37,7 @@
     },
     "/players/{id}": {
       "get": {
-        "tags": [
-          "Get team player by id"
-        ],
+        "tags": ["Get team player by id"],
         "description": "",
         "parameters": [
           {
@@ -74,9 +57,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Update a team player by _id"
-        ],
+        "tags": ["Update a team player by _id"],
         "description": "",
         "parameters": [
           {
@@ -138,9 +119,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Delete team player by id"
-        ],
+        "tags": ["Delete team player by id"],
         "description": "",
         "parameters": [
           {
@@ -168,9 +147,7 @@
     },
     "/players/createPlayer": {
       "post": {
-        "tags": [
-          "Create a new team player"
-        ],
+        "tags": ["Create a new team player"],
         "description": "",
         "parameters": [
           {
@@ -222,9 +199,7 @@
     },
     "/users/": {
       "get": {
-        "tags": [
-          "Get all users"
-        ],
+        "tags": ["Get all users"],
         "description": "",
         "responses": {
           "200": {

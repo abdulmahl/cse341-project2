@@ -15,6 +15,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 app
+  .use(cors())
   .use(cors({ methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"] }))
   .use(cors({ origin: "*" }));
 

@@ -2,7 +2,7 @@ const passport = require("passport");
 const router = require("express").Router();
 const cors = require("cors");
 
-router.use("*", cors());
+router.use(cors());
 router.use("/", require("./swagger"));
 router.use("/players", require("./routes"));
 router.use("/users", require("./user-routes"));
@@ -13,6 +13,12 @@ router.get("/home", (req, res) => {
   );
 });
 
-router.get("/login", passport.authenticate("github"), (req, res) => {});
+router.get(
+  "/login",
+  passport.authenticate("github", { failureRedirect: "/home" }),
+  (req, res) => {
+    res.redirect("/dashboard");
+  }
+);
 
 module.exports = router;
