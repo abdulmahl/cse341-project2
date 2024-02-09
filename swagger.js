@@ -5,8 +5,8 @@ const doc = {
     title: "Ball Players API",
     description: "Basketball Team Player API",
   },
-  host: "localhost:3000",
-  schemes: ["http", "https"],
+  host: "basketball-players-api.onrender.com",
+  schemes: ["https"],
 };
 
 const outputFile = "./swagger.json";
