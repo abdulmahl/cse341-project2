@@ -59,7 +59,7 @@ const updatePlayer = async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(422).json({ message: "Error: id must be valid" });
   }
-  const playerId = new Object(req.params.id);
+  const playerId = new ObjectId(req.params.id);
   const updatedPlayer = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,

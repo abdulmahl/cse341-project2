@@ -41,7 +41,7 @@ Content-Type: application/json
     "lastname": "James",
     "age": 39,
     "height": "2.6m",
-    "jerseyNo": 23,
+    "jerseyNo": 24,
     "position": "Point Guard",
     "shoeSize": 13,
     "isCaptain": true,
