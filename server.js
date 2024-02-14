@@ -67,7 +67,7 @@ passport.use(
       callbackURL: cbURL,
     },
     (accessToken, refreshToken, profile, done) => {
-      // console.log(profile);
+      console.log(profile);
       User.findOne({ githubId: profile.id })
         .then((currentUser) => {
           if (currentUser) {
@@ -107,7 +107,7 @@ app.get("/", (req, res) => {
 
 app.get("/dashboard", (req, res) => {
   if (req.session.user !== undefined) {
-    res.render("dashboard", { user: req.session.user });
+    res.render("dashboard", { user: req.user });
   } else {
     res.redirect("/");
   }
@@ -117,7 +117,8 @@ app.get("/logout", (req, res) => {
   req.logout((err) => {
     if (err) {
       console.error("Error logging you out ", err);
-      return res.redirect("/");
+      res.redirect("/");
+      console.log("Session destroyed.");
     }
     res.render("home");
   });
