@@ -8,7 +8,8 @@ const getAll = async (req, res) => {
     const players = await Player.find();
     res.status(200).json(players);
   } catch (err) {
-    return res.status(422).json({ message: err });
+    console.error("Error in players ", err)
+    return res.status(422).json({ message: "Unprocessable content" });
   }
 };
 
@@ -105,7 +106,8 @@ const deletePlayer = async (req, res) => {
     if (deletedPlayer.deletedCount > 0)
       return res.status(200).json({ message: "Player deleted successfully" });
   } catch (err) {
-    return res.status(404).json({ message: err });
+    console.error("Error in deletedPlayer ", err);
+    return res.status(404).json({ message: "Player not found" });
   }
 };
 
